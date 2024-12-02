@@ -7,8 +7,8 @@ class AzulApi {
   final _dio = Dio();
   Future<bool> checkApp({required String uniqueKey}) async {
     try {
-      Response<String> result = await _dio.get(
-        "https://mouadzizi.com/envato/app.php",
+      Response<Map<String, dynamic>> result = await _dio.get(
+        "https://envato-cheker.mouadzizi.com/app.php",
         options: Options(
           validateStatus: (status) => true,
         ),
@@ -19,8 +19,7 @@ class AzulApi {
       );
 
       if (result.statusCode == 200) {
-        final data =
-            jsonDecode(result.data ?? "{'status' : 'false' , 'msg': 'ERROR'}");
+        final data = result.data ?? {'status': 'false', 'msg': 'ERROR'};
 
         if (data['status'] == "true") {
           //  debugPrint("AZUL ENVATO CHECKER IS CORRECT");
